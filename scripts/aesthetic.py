@@ -69,7 +69,7 @@ def on_ui_tabs():
             aesthetic_clip.update_aesthetic_embeddings()
             updates = [gr.Dropdown.update(choices=sorted(aesthetic_clip.aesthetic_embeddings.keys())) for _ in range(len(dropdown_components))]
 
-            return *updates, res
+            return [*updates, res]
 
         create_embedding_ae.click(
             fn=generate_embs,
