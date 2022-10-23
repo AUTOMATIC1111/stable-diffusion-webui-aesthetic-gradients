@@ -198,7 +198,7 @@ class AestheticCLIP:
             self.image_embs /= self.image_embs.norm(dim=-1, keepdim=True)
             self.image_embs.requires_grad_(False)
 
-    def __call__(self, remade_batch_tokens, multipliers):
+    def __call__(self, remade_batch_tokens, multipliers, **kwargs):
         z = self.process_tokens(remade_batch_tokens, multipliers)
 
         if not self.skip and self.aesthetic_steps != 0 and self.aesthetic_lr != 0 and self.aesthetic_weight != 0 and self.image_embs_name is not None:
