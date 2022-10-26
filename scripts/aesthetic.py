@@ -1,7 +1,7 @@
 
-from modules import scripts, script_callbacks
 import aesthetic_clip
 import gradio as gr
+from modules import script_callbacks, scripts
 
 aesthetic = aesthetic_clip.AestheticCLIP()
 aesthetic_imgs_components = []
@@ -86,7 +86,7 @@ def on_ui_tabs():
 
         aesthetic_imgs_components.clear()
 
-    return [(aesthetic_interface, "Create aesthetic embedding", "aesthetic_interface")]
+    return [(aesthetic_interface, "Create Aesthetic Embedding", "aesthetic_interface")]
 
 
 script_callbacks.on_model_loaded(on_model_loaded)
