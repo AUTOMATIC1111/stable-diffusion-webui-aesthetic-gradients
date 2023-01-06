@@ -1,5 +1,5 @@
 
-from modules import scripts, script_callbacks
+from modules import scripts, script_callbacks, shared
 import aesthetic_clip
 import gradio as gr
 
@@ -39,6 +39,12 @@ class AestheticScript(scripts.Script):
 def on_model_loaded(sd_model):
     aesthetic.process_tokens = sd_model.cond_stage_model.process_tokens
     sd_model.cond_stage_model.process_tokens = aesthetic
+
+
+def on_script_unloaded():
+    cond_stage_model = shared.sd_model.cond_stage_model
+    if type(cond_stage_model.process_tokens) == aesthetic_clip.AestheticCLIP:
+        cond_stage_model.process_tokens = cond_stage_model.process_tokens.process_tokens
 
 
 def on_ui_tabs():
@@ -89,5 +95,6 @@ def on_ui_tabs():
     return [(aesthetic_interface, "Create aesthetic embedding", "aesthetic_interface")]
 
 
+script_callbacks.on_script_unloaded(on_script_unloaded)
 script_callbacks.on_model_loaded(on_model_loaded)
 script_callbacks.on_ui_tabs(on_ui_tabs)
