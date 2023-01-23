@@ -94,7 +94,7 @@ def aesthetic_clip():
     global aesthetic_clip_model
 
     if aesthetic_clip_model is None or aesthetic_clip_model.name_or_path != shared.sd_model.cond_stage_model.wrapped.transformer.name_or_path:
-        aesthetic_clip_model = CLIPModel.from_pretrained(shared.sd_model.cond_stage_model.wrapped.transformer.name_or_path)
+        aesthetic_clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14")
         aesthetic_clip_model.cpu()
 
     return aesthetic_clip_model
